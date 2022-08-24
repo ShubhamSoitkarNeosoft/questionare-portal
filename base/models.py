@@ -21,3 +21,11 @@ class Client(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class Interviewee(get_user_model()):
+    user = models.OneToOneField(get_user_model(), on_delete= models.PROTECT, related_name='+')
+    client = models.ForeignKey(Client , on_delete = models.PROTECT)
+    interview_date = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'{self.user}'

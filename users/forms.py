@@ -1,0 +1,35 @@
+import email
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, get_user_model
+
+
+User = get_user_model()
+
+class CustomUserCreationForm(UserCreationForm):
+    # first_name = forms.CharField(max_length=50)
+    # last_name = forms.CharField(max_length=50)
+
+    class Meta:
+        model = User
+        fields = ('first_name','last_name','email','password1', 'password2')
+
+# class UserLoginForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ('email',)
+#     # email = forms.CharField(help_text=False)
+    # password = forms.CharField()
+
+    # def clean(self, *args, **kwargs):
+    #     username = self.cleaned_data.get('email')
+    #     password = self.cleaned_data.get('password')
+
+    #     if username and password:
+    #         user = authenticate(username=username,password=password)
+    #         if not user:
+    #             raise forms.ValidationError('User Does Not Exist')
+    #         if not user.check_password(password):
+    #             raise forms.ValidationError('Incorrect Password')
+    #     return super(UserLoginForm, self).clean(*args, **kwargs)

@@ -1,0 +1,2 @@
+When you set related_name="+" Django does not create a backwards relation. 
+https://stackoverflow.com/questions/34003865/django-reverse-query-name-clash

@@ -9,7 +9,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-from base.models import Client
+# from base.models import Client
 
 
 
@@ -39,10 +39,11 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    client = models.ForeignKey(Client, on_delete= models.PROTECT)
+    # client = models.ForeignKey(Client, on_delete= models.PROTECT ,blank= True ,null = True, related_name="+")
 
     objects = UserManager()
 
