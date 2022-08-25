@@ -23,7 +23,7 @@ class IntervieweeForm(UserChangeForm):
     password = None
     class Meta:
         model = Interviewee
-        fields = ('user','Category', 'client')
+        fields = ('Category', 'client')
 
 # class UserLoginForm(UserCreationForm):
 #     class Meta:
