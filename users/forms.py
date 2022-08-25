@@ -22,21 +22,15 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
-
-
-
-
 class IntervieweeForm(UserChangeForm):
     # first_name = forms.CharField(max_length=50)
     # last_name = forms.CharField(max_length=50)
     password = None
+
     class Meta:
         model = Interviewee
-<<<<<<< HEAD
         fields = ('Technology', 'client')
-=======
-        fields = ('Category', 'client')
->>>>>>> bd3cfa27d13e7aa36eee4b67a24ba3c14da3ec99
+
 
 # class UserLoginForm(UserCreationForm):
 #     class Meta:
