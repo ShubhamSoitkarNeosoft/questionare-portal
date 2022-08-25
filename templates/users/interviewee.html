@@ -2,19 +2,19 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container">
+<div class="container" align="center" >
 
-    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;" >
         {% csrf_token %}
-        <fieldset class="form-group">
+        <fieldset class="form-group" >
             <legend class="mb-3 white-important">
-                Register a new account
+                <h5 style="margin-left:10%"> welcome {{request.user}}</h5>
             </legend>
             {{ form | crispy }}
         </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-success" type="submit">Sign Up as Interviewee</button>
-        </div>
+
+            <button class="btn btn-outline-success" type="submit" style="margin-left:7%">Sign Up as Interviewee</button>
+
     </form>
 </div>
 

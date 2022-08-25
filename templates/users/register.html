@@ -2,28 +2,20 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<div align="center" >
 
-
-
-<div class="container">
-
-    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:50px;" >
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="mb-3 white-important">
-                Register a new account
-            </legend>
+        <fieldset class="form-group" >
+                <h2>Register a new account</h2>
+
             {{ form | crispy }}
         </fieldset>
-        <div class="form-group">
             <button class="btn btn-outline-success" type="submit">Sign Up</button>
-        </div>
+
+
     </form>
 </div>
-<div class="pt-3">
-    <small class="text-muted">
-        Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-    </small>
-</div>
+
 
 {% endblock %}

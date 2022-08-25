@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Client, Mentor , Interviewee, Category, QuestionSet, Question
+from .models import Client, Mentor , Interviewee, Technology, QuestionSet, Question
 
 admin.site.register(Client)
 admin.site.register(Mentor)
-admin.site.register(Category)
+admin.site.register(Technology)
 admin.site.register(QuestionSet)
 admin.site.register(Question)
 

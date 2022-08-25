@@ -9,7 +9,7 @@ def homePage(request):
 
 
 def registerUser(request):
-    form  = CustomUserCreationForm()
+    form = CustomUserCreationForm()
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():

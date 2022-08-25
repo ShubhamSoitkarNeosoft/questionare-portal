@@ -11,10 +11,19 @@ User = get_user_model()
 class CustomUserCreationForm(UserCreationForm):
     # first_name = forms.CharField(max_length=50)
     # last_name = forms.CharField(max_length=50)
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].help_text = ""
+        self.fields['password2'].help_text = ""
+
 
     class Meta:
         model = User
-        fields = ('first_name','last_name','email','password1', 'password2',)
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
+
+
+
+
 
 
 class IntervieweeForm(UserChangeForm):
@@ -23,7 +32,7 @@ class IntervieweeForm(UserChangeForm):
     password = None
     class Meta:
         model = Interviewee
-        fields = ('user','Category', 'client')
+        fields = ('Technology', 'client')
 
 # class UserLoginForm(UserCreationForm):
 #     class Meta:

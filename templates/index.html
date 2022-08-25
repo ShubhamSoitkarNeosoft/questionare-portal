@@ -10,13 +10,12 @@
 <body>
   {% include "navbar.html" %}
 <br>
-<section id="section-jumbotron" class="jumbotron jumbotron-fluid d-flex justify-content-center align-items-center">
+<section id="section-jumbotron" class=" d-flex justify-content-center align-items-center" style="padding-top:200px;">
   <div class="container text-center">
     <h2 class="display-3 text-info">Interviewee Portal</h2>
     <p class="display-4 d-none d-sm-block"></p>
-    <p class="lead">Sign Up Below</p>
     <a href="{% url 'register' %}" class="btn btn-lg btn-info" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Sign Up</a>
-    
+   <a href="{% url 'login' %}" class="btn btn-lg btn-info" style="padding-right: 35px; border-radius: 0%;"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Sign IN</a>
     <br><br><br>
   </div>  
 </section>
