@@ -1,7 +1,7 @@
 """
 Database models.
 """
-
+# from base.models import Client
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
@@ -9,8 +9,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-# from base.models import Client
-
 
 
 class UserManager(BaseUserManager):
@@ -38,7 +36,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
-    email = models.EmailField(max_length=255, unique=True)
+    email = models.EmailField(max_length=255)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)

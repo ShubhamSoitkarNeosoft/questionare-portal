@@ -1,11 +1,12 @@
 import email
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 # from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
-
+from base.models import Interviewee
 
 User = get_user_model()
+
 
 class CustomUserCreationForm(UserCreationForm):
     # first_name = forms.CharField(max_length=50)
@@ -13,7 +14,16 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name','last_name','email','password1', 'password2')
+        fields = ('first_name','last_name','email','password1', 'password2',)
+
+
+class IntervieweeForm(UserChangeForm):
+    # first_name = forms.CharField(max_length=50)
+    # last_name = forms.CharField(max_length=50)
+    password = None
+    class Meta:
+        model = Interviewee
+        fields = ('user','Category', 'client')
 
 # class UserLoginForm(UserCreationForm):
 #     class Meta:

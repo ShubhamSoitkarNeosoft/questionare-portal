@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect, HttpResponse
-from users.forms import CustomUserCreationForm
+from users.forms import CustomUserCreationForm, IntervieweeForm
 from django.contrib.auth import authenticate,get_user_model,login,logout
 
 
@@ -17,6 +17,7 @@ def registerUser(request):
             return redirect('login')
     return render(request, 'users/register.html', {'form':form})
 
+
 def userLogin(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -24,10 +25,19 @@ def userLogin(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse('Success')
+            return redirect('interviewee')
         else:
             print("user is not authenticated")
     return render(request, 'users/login.html')
 
+
+def registerInterviewee(request):
+    form  = IntervieweeForm()
+    if request.method == 'POST':
+        form = IntervieweeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'users/interviewee.html', {'form':form})
 
 

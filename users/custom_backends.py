@@ -1,11 +1,14 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 
+User = get_user_model()
 
-class AuthBackend():
-    def authenticate(self,request,username,password):
+
+class AuthBackend:
+
+    def authenticate(self,email, password):
         try:
-            user = User.objects.get(Q(username__iexact=username) | Q(email__iexact=username))
+            user = User.objects.get(Q(email__iexact=username))
             success = user.check_password(password)
             if success:
                 return user
