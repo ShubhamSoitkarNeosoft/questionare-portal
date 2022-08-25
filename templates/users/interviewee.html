@@ -2,14 +2,24 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<<<<<<< HEAD
 <div class="container" align="center" >
 
     <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;" >
+=======
+<div class="container">
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
+>>>>>>> bd3cfa27d13e7aa36eee4b67a24ba3c14da3ec99
         {% csrf_token %}
         <fieldset class="form-group" >
             <legend class="mb-3 white-important">
+<<<<<<< HEAD
                 <h5 style="margin-left:10%"> welcome {{request.user}}</h5>
+=======
+                Add Questions to Portal
+>>>>>>> bd3cfa27d13e7aa36eee4b67a24ba3c14da3ec99
             </legend>
+           <h5> {{request.user}}</h5>
             {{ form | crispy }}
         </fieldset>
 

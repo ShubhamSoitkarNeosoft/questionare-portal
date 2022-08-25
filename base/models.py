@@ -39,8 +39,8 @@ class Interviewee(get_user_model()):
     interview_date = models.CharField(max_length=255)
     Technology = models.ForeignKey(Technology, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.user}'
+    # def __str__(self):
+    #     return f'{self.user}'
 
 
 class QuestionSet(models.Model):

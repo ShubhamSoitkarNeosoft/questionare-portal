@@ -36,7 +36,11 @@ def registerInterviewee(request):
     if request.method == 'POST':
         form = IntervieweeForm(request.POST)
         if form.is_valid():
-            form.save()
+            # print('--------',form.instance.user)
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+            print('----',user.user)
             return redirect('login')
     return render(request, 'users/interviewee.html', {'form':form})
 
