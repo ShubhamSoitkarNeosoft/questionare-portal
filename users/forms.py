@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 # from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
-from base.models import Interviewee
+from base.models import Interviewee, Contactus
 
 User = get_user_model()
 
@@ -29,8 +29,18 @@ class IntervieweeForm(UserChangeForm):
 
     class Meta:
         model = Interviewee
-        fields = ('Technology', 'client')
+        fields = ('category_name', 'client')
 
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contactus
+        fields="__all__"
+        widgets = {
+            'name': forms.TextInput(attrs={ 'class': 'form-control' }),
+            'email': forms.EmailInput(attrs={ 'class': 'form-control' }),
+            'message': forms.TextInput(attrs={ 'class': 'form-control' })
+        }
 
 # class UserLoginForm(UserCreationForm):
 #     class Meta:

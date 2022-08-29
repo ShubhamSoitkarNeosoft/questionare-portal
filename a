@@ -1,0 +1,162 @@
+ view = request.POST.get("client")
+        client = Client.objects.get()
+        print(client)
+        t1 = Technology.objects.all()
+        for t in t1:
+            t2 = Question.objects.filter(technology__technology_name=t).filter(client__name=client)
+            return render(request, 'base/question.html', {'client': client})
+
+
+
+            t1 = Technology.objects.all()
+            for t in t1:
+                t2 = Question.objects.filter(technology__technology_name=t).filter(client__name=client)
+                return render(request, 'base/question.html', {'client': client})
+
+
+    def registerInterviewee(request):
+    form = IntervieweeForm()
+    form1 = QuestionForm()
+    if request.method == 'POST':
+        form = IntervieweeForm(request.POST)
+        view = request.POST.get("client")
+        client = Client.objects.get(id=int(view))
+        t1 = Technology.objects.all()
+        for t in t1:
+            t2 = Question.objects.filter(technology__technology_name=t).filter(client__name=client)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+        if client:
+            return render(request, 'base/question.html', {'form1': form1, 'client': client,'technology':t1, 'question':t2})
+        form1 = IntervieweeForm(request.POST)
+        print("Before if")
+        if form1.is_valid():
+            print("after if")
+            form1.save()
+            print("####")
+            print(client)
+            return render(request, 'base/question.html', {'form1': form1, 'client':client,'technology':t1, 'question':t2})
+    return render(request, 'base/question.html', {'form': form})
+
+
+def registerInterviewee(request):
+    form = IntervieweeForm()
+    form1 = QuestionForm()
+    if request.method == 'POST':
+        form = IntervieweeForm(request.POST)
+        #l = []
+        #view = l[0]
+        view = request.POST.get("client")
+        client = Client.objects.get(id=int(view))
+        #l.append(view)
+
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        #print(l)
+        t1 = Technology.objects.all()
+        for t in t1:
+            t2 = Question.objects.filter(technology__technology_name=t).filter(client__name=client)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+        if client:
+            return render(request, 'base/question.html',
+                          {'form1': form1, 'client': client, 'technology': t1, 'question': t2})
+        form1 = IntervieweeForm(request.POST)
+        print("Before if")
+        if form1.is_valid():
+            print("after if")
+            form1.save()
+            print("####")
+            print(client)
+            return render(request, 'base/question.html',{'form1': form1, 'client': client, 'technology': t1, 'question': t2})
+    return render(request, 'base/question.html', {'form': form})
+
+
+
+
+def registerInterviewee(request):
+    form = IntervieweeForm()
+    if request.method == 'POST':
+        form = IntervieweeForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+            client = form.cleaned_data['client']
+            #data = serializers.serialize('json', [client] )
+            #request.session['client'] = client
+            #print(data)
+            return redirect('login')
+    return render(request, 'users/interviewee.html', {'form': form})
+
+
+    {%else%}
+        <div class="container">
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
+        {% csrf_token %}
+        <h4 style="margin-left:10%"> welcome {{request.user}}</h4><br>
+        <fieldset class="form-group" >
+            <legend class="mb-3 white-important">
+            </legend>
+            {{ form | crispy }}
+        </fieldset>
+            <a href="interviewee"><button class="btn btn-outline-success" type="submit" style="margin-left:7%">ADD Question</button></a>
+    </form>
+</div>
+{%endif%}
+
+
+{% extends "navbar.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" align="center" >
+<div class="container">
+
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
+                <h2>{{client}}</h2>
+        {%for i in technology%}
+        <h2>{{i}}</h2>
+        {%endfor%}
+        {%for i in question%}
+        <h2>{{i}}</h2>
+        {%endfor%}
+        <fieldset class="form-group" >
+            <legend class="mb-3 white-important">
+                <h5 style="margin-left:7%">Add Questions</h5>
+            </legend>
+            {% csrf_token %}
+            {{ form1 | crispy }}
+        </fieldset>
+            <a href="interviewee"><button class="btn btn-outline-success" type="submit" style="margin-left:7%">ADD</button></a>
+    </form>
+</div>
+
+{% endblock %}
+
+
+
+
+ <table class="table">
+    <tr>
+        <th>Python</th><br>
+    </tr>
+        {%for i in question_python%}
+    <tr>
+        <td>{{ i }} </td>
+    </tr>
+        {%endfor%}
+    </table>
+     <table class="table">
+    <tr>
+        <th>Django</th><br>
+    </tr>
+        {%for i in question_django%}
+    <tr>
+        <td>{{ i }} </td>
+    </tr>
+        {%endfor%}
+    </table>

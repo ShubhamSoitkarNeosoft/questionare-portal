@@ -2,10 +2,10 @@ from socket import fromshare
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .models import Question, QuestionSet
 
-User = get_user_model()
 
-class CustomUserCreationForm(UserCreationForm):
+class QuestionForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = '__all__'
+        model = Question
+        fields = ['question', 'technology', 'client', 'category']
