@@ -27,6 +27,21 @@
         .table{
             display: inline flow-root;
         }
+
+        .card-shadow{
+        box-shadow: 1px 10px 24px #b1b1b1c9;
+        }
+        .button-container{
+        display: inline;
+        }
+        .django-ckeditor-widget{
+            width: 100%;
+            config.height : 0;
+        }
+        .card card-shadow {
+                height: 20px;
+                width: 20px;
+            }
     </style>
 </head>
 
@@ -44,7 +59,7 @@
 .
                 <nav class="navbar-nav" style="margin-left:85%" >
                     <a href="http://127.0.0.1:8000/user/" class="nav-item nav-link">User</a>
-                    <a href="#" class="nav-item nav-link">Admin</a>
+                    <a href="{% url 'admin'%}" class="nav-item nav-link">Admin</a>
                     <a href="http://127.0.0.1:8000/user/contact" class="nav-item nav-link">Contact</a>
 
                 </nav>

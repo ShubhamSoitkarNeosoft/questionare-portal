@@ -2,24 +2,34 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container" align="center" >
 
-    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;" >
-
-<div class="container">
-    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:100px;">
-        <h4 style="margin-left:10%"> welcome {{request.user}}</h4><br>
+<div class="container" align="center" style="margin-top:8%" >
+        <div c>
+            <h5 >Select Client</h5>
+  <div >
+       <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:5px;" >
         <fieldset class="form-group" >
             <legend class="mb-3 white-important">
             </legend>
             {% csrf_token %}
             {{ form | crispy }}
         </fieldset>
+        <div class="buttons-container">
+       <a href="http://127.0.0.1:8000/user/interviewee/"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD Question</button></a>
+     <a href="http://127.0.0.1:8000/user/logout/"><button class="btn btn-outline-success" type="button" style="margin-left:1%">Logout</button></a>
+     <a href="{% url 'result' %}"><button class="btn btn-outline-success" type="button" style="margin-left:1%">Report</button></a><br>
 
-            <a href="question/"><button class="btn btn-outline-success" type="submit" style="margin-left:7%">ADD Question</button></a>
+        </div>
+<!--        <div class="buttons-container">-->
+<!--                <a href="http://127.0.0.1:8000/base/question/"><button class="btn btn-outline-success" type="submit" style="margin-left:7%">ADD Question</button></a><br><br>-->
+<!--                <form action="{% url 'logout' %}" method="post"> <a href="logout/"><button class="btn btn-outline-success" type="button" style="margin-left:1%">Logout</button></a></form><br>-->
+<!--        </div>-->
+  </div>
 
-    </form>
+  </div>
+  </div>
 </div>
+
 
 
 {% endblock %}

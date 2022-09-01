@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Mentor , Interviewee, Technology, QuestionSet, Question, Category, Contactus
+from .models import Client, Mentor , Interviewee, Technology, QuestionSet, Question, Category, Contactus, Assignment
 
 admin.site.register(Client)
 admin.site.register(Mentor)
@@ -25,3 +25,9 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Contactus, ContactAdmin)
+
+
+class AssignmentAdmin(admin.ModelAdmin):
+    list_display = ['client', 'user', 'status', 'job_profile', 'assigned_date', 'assigned_by']
+
+admin.site.register(Assignment, AssignmentAdmin)

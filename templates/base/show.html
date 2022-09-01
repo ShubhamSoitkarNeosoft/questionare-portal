@@ -1,0 +1,167 @@
+{% extends "navbar.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" align="center" style="
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+" >
+<div  style=" width: 100%;
+    margin-right: 50px;">
+  <h5 >Client Name-{{client}}<br>Category Name-{{category}}</h5>
+  <div >
+      {%if result%}
+    <div class="buttons-container">
+       <a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
+        <a href="{% url 'result'%}"><button class="btn btn-outline-success" type="button" style="    margin: 5px;
+    white-space: nowrap;">Result</button></a>
+        <a href="{% url 'assign'%}"><button class="btn btn-outline-success" type="button" style=" margin: 5px;
+    white-space: nowrap;">Back</button></a>
+  </div><br>
+      {%else%}
+       <a href="{% url 'assign'%}"><button class="btn btn-outline-success" type="button" style=" margin: 5px;
+    white-space: nowrap;">Back</button></a>
+      {%endif%}
+   <table class="table align-middle">
+    <thead>
+      <tr>
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>Python</strong>
+              <div style="">{{question_python_count}}</div>
+
+          </span>
+
+      </tr>
+    </thead>
+    <tbody>
+             {%for i in question_python%}
+      <tr>
+        <td>{{ i }}</td>
+      </tr>
+            {%endfor%}
+
+    </tbody>
+  </table>
+
+  <table class="table align-middle" >
+    <thead>
+      <tr>
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>Django</strong>
+              <div style="">{{question_django_count}}</div>
+
+          </span>
+      </tr>
+    </thead>
+    <tbody>
+             {%for i in question_django%}
+      <tr>
+        <td>{{ i }}</td>
+      </tr>
+            {%endfor%}
+    </tbody>
+  </table>
+
+      <table class="table align-middle">
+    <thead>
+      <tr>
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>Docker</strong>
+              <div style="">{{question_docker_count}}</div>
+
+          </span>
+
+      </tr>
+    </thead>
+    <tbody>
+             {%for i in question_docker%}
+      <tr>
+        <td>{{ i }}</td>
+      </tr>
+            {%endfor%}
+
+    </tbody>
+  </table>
+
+      <table class="table align-middle">
+    <thead>
+      <tr>
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>SQL</strong>
+              <div style="">{{question_sql_count}}</div>
+
+          </span>
+
+      </tr>
+    </thead>
+    <tbody>
+             {%for i in question_sql%}
+      <tr>
+        <td>{{ i }}</td>
+      </tr>
+            {%endfor%}
+
+    </tbody>
+  </table>
+
+
+  </div>
+</div>
+<br>
+
+{% endblock %}

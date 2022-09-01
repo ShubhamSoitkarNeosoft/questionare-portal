@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'crispy_forms',
     'widget_tweaks',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db4.sqlite3',
+        'NAME': BASE_DIR / 'db5.sqlite3',
     }
 }
 
@@ -132,3 +133,5 @@ AUTHENTICATION_BACKENDS = (
     'users.custom_backends.AuthBackend',
     'django.contrib.auth.backends.ModelBackend'
     )
+
+LOGOUT_REDIRECT_URL = '/logout'

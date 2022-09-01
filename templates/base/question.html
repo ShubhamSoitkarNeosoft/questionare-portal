@@ -2,15 +2,89 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="container" align="center" style="padding-top:50px;" >
-    <h4> Client Name-{{client}}</h4>
-     <h4> Category Name-{{category}}</h4>
 
-    <div class="table-responsive">
-  <table class="table align-middle">
+
+<!--<div class="card">-->
+<!--  <h5 class="card-header">Client Name-{{client}}<br>Category Name-{{category}}</h5>-->
+<!--  <div class="card-body">-->
+<!--      <div class="table-responsive">-->
+<!--  <table class="table align-middle">-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--          Python-->
+<!--      </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--             {%for i in question_python%}-->
+<!--      <tr>-->
+<!--        <td>{{ i }}</td>-->
+<!--      </tr>-->
+<!--            {%endfor%}-->
+
+<!--    </tbody>-->
+<!--  </table>-->
+<!--        <div class="table-responsive">-->
+<!--  <table class="table align-middle">-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--          Django-->
+<!--      </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--             {%for i in question_django%}-->
+<!--      <tr>-->
+<!--        <td>{{ i }}</td>-->
+<!--      </tr>-->
+<!--            {%endfor%}-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--    <br>-->
+
+<div class="container" align="center" style="
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+" >
+<div class="card card-shadow" style=" width: 100%;
+    margin-right: 50px;">
+  <h5 class="card-header">Client Name-{{client}}<br>Category Name-{{category}}</h5>
+  <div class="card-body">
+    <div class="buttons-container">
+       <a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD Question</button></a>
+  </div><br>
+   <table class="table align-middle">
     <thead>
       <tr>
-          Python
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>Python</strong>
+              <div style="">{{question_python_count}}</div>
+
+          </span>
+
       </tr>
     </thead>
     <tbody>
@@ -22,11 +96,28 @@
 
     </tbody>
   </table>
-        <div class="table-responsive">
-  <table class="table align-middle">
+
+
+  <table class="table align-middle" >
     <thead>
       <tr>
-          Django
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+            <strong>Django</strong>
+              <div style="">{{question_django_count}}</div>
+
+          </span>
       </tr>
     </thead>
     <tbody>
@@ -35,24 +126,21 @@
         <td>{{ i }}</td>
       </tr>
             {%endfor%}
-
     </tbody>
   </table>
-
+  </div>
 </div>
-    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:5px;" >
-        <fieldset class="form-group" >
-            <legend class="mb-3 white-important">
-            </legend>
-            {% csrf_token %}
-            {{ form | crispy }}
-        </fieldset>
-        <a href="question/"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD Question</button></a>
+<br>
 
-    </form>
-
-</div>
 {% endblock %}
+
+
+
+
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
 
 

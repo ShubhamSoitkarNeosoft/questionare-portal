@@ -1,0 +1,79 @@
+{% extends "navbar.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container" align="center" style="
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+" >
+<div class="card card-shadow" style=" width: 100%;
+    margin-right: 50px;">
+    <h5 class="card-header">Result For client {{client}}</h5>
+  <div class="card-body">
+
+   <table class="table align-middle">
+    <thead>
+      <tr>
+          <span style="font-weight: 600;
+    width: 100%;
+    display: flex;
+    background-color: #eee;
+    border: 0px solid grey !important;
+    padding: 5PX;
+    border: hidden;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 1px 2px 6px #ababab;">
+              <strong>Result</strong>
+              {{count_result}}
+          </span>
+ </thead>
+  <tr>
+    <th>Date</th>
+    <th>Assigned_by</th>
+    <th>Result</th>
+  </tr>
+       {%for i in result%}
+       <tr>
+    <td>{{i.assigned_date}}</td>
+    <td>{{i.assigned_by}}</td>
+    <td>{{i.status}}</td>
+  </tr>
+       {%endfor%}
+
+</table>
+  </div>
+</div>
+</div>
+<center>
+<a href="{% url 'viewquestion'%}"><button class="btn btn-outline-success" type="button" style="margin-top:20px">Back</button></a>
+</center>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@ from base.models import Client, Question, Technology
 from base.forms import QuestionForm
 import json
 from base.models import Contactus
+from django.contrib.auth import logout
 
 
 def homePage(request):
@@ -20,9 +21,15 @@ def registerUser(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.save()
             return redirect('login')
     return render(request, 'users/register.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 def userLogin(request):
@@ -30,9 +37,11 @@ def userLogin(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
+        request.session['user'] = str(user)
+        #print(request.session['user'])
         if user is not None:
             login(request, user)
-            return redirect('interviewee')
+            return redirect('assign')
         else:
             print("user is not authenticated")
     return render(request, 'users/login.html')
@@ -43,7 +52,6 @@ def registerInterviewee(request):
     if request.method == 'POST':
         form = IntervieweeForm(request.POST)
         if form.is_valid():
-            # print('--------',form.instance.user)
             user = form.save(commit=False)
             user.user = request.user
             user.save()
@@ -67,3 +75,8 @@ def contactus(request):
         messages.success(request, "Query registered Succesfully!!")
     # return redirect ('/user/contact')
     return render(request, 'users/contactus.html')
+
+
+def UserDashboardView(request):
+    user = request.user
+    return render(request, 'users/dashboard.html', {'user': user})
