@@ -38,9 +38,11 @@ def userLogin(request):
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         request.session['user'] = str(user)
-        #print(request.session['user'])
         if user is not None:
             login(request, user)
+            if user.is_superuser:
+                login(request, user)
+                return redirect('admin')
             return redirect('assign')
         else:
             print("user is not authenticated")
@@ -91,4 +93,5 @@ def assesment(request):
             print(form.is_valid)
             form.save()
     return render(request, 'users/assesment.html', {'form': form})
+
 

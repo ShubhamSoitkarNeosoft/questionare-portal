@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import QuestionForm,TechForm,ClientForm,InterviewForm,CategoryForm,MentorForm
+from .forms import QuestionForm, TechForm, ClientForm, InterviewForm, CategoryForm, MentorForm, AssignmentForm
 from .models import Question, Contactus, Category
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from base.models import Client, Question, Technology, Assignment, Interviewee, Assesment, Mentor
@@ -16,14 +16,11 @@ def AddQuestion(request):
     except:
         form = QuestionForm()
     if request.method == 'POST':
-        q = request.POST.get('question')
-        print(q)
         form = QuestionForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
             return redirect('question')
-    return render(request, 'base/addquestion.html', {'form': form})
+    return render(request, 'base/addquestion.html', {'form': form, 'client1': client, 'category': category})
 
 
 def ViewQuestion(request):
@@ -78,7 +75,7 @@ def AssignView(request):
         if form1.is_valid():
             user = form1.save(commit=False)
             user.user = request.user
-            user.save()
+            #user.save()
             client = form1.cleaned_data['client']
             request.session['client'] = str(client)
             category = form1.cleaned_data['category_name']
@@ -104,44 +101,50 @@ def admin(request):
   mentor = Mentor.objects.count()
   category = Category.objects.count()
   assesment = Assesment.objects.count()
-  return render(request, 'admin.html', {'question':question,'contact':contact,'interview':interview,'client':client, 'mentor':mentor,'category':category,'assesment':assesment})
+  assignment = Assignment.objects.count()
+  technology = Technology.objects.count()
+  return render(request, 'admin.html', {'question': question, 'contact': contact, 'interview': interview, 'client': client, 'mentor': mentor, 'category': category, 'assesment': assesment, 'assignment': assignment,'technology':technology})
 
 
 def contact_table(request):  
     contact = Contactus.objects.all()
     question = Question.objects.all()
-    return render(request,'base/contacttable.html',{'contact':contact,'question':question})
+    return render(request, 'base/contacttable.html', {'contact':contact, 'question': question})
 
 
 def ques_table(request):  
-    question=Question.objects.all()
-    return render(request,'base/qatable.html',{'question':question})
+    question = Question.objects.all()
+    return render(request, 'base/qatable.html', {'question': question})
 
 
 def client_table(request):
-    client=Client.objects.all()
-    return render(request,'base/clienttable.html',{'client':client}) 
+    client = Client.objects.all()
+    return render(request, 'base/clienttable.html', {'client': client})
 
 
 def interview_table(request):
-    inter=Interviewee.objects.all()
-    return render(request,'base/interviewtable.html',{'inter':inter})
+    inter = Interviewee.objects.all()
+    return render(request, 'base/interviewtable.html', {'inter': inter})
 
 
 def category_table(request):
-    category=Category.objects.all()
-    return render(request,'base/categtable.html',{'category':category})    
+    category = Category.objects.all()
+    return render(request, 'base/categtable.html', {'category': category})
 
 
 def assesment_table(request):
-    assesment=Assesment.objects.all()
-    return render(request,'base/assestable.html',{'assesment':assesment})        
+    assesment = Assesment.objects.all()
+    return render(request, 'base/assestable.html', {'assesment': assesment})
 
 
 def mentor_table(request):
     mentor = Mentor.objects.all()
-    print(mentor)
-    return render(request,'mentortable.html',{'mentor':mentor})     
+    return render(request, 'mentortable.html', {'mentor': mentor})
+
+
+def technologytable(request):
+    technology = Technology.objects.all()
+    return render(request, 'base/techtable.html', {'technology': technology})
 
 
 def addcateg(request):   
@@ -151,7 +154,7 @@ def addcateg(request):
         if form.is_valid():
             form.save()
         
-    return render(request,'base/addcateg.html',{'form':form}) 
+    return render(request, 'base/addcateg.html', {'form': form})
 
 
 def addmentor(request):
@@ -161,29 +164,26 @@ def addmentor(request):
         if form.is_valid():
             form.save()
         return redirect('addmentor')
-    return render(request,'base/addmentor.html',{'form':form})
+    return render(request, 'base/addmentor.html', {'form': form})
 
 
 def admintech(request):
     form = TechForm()
     if request.method == 'POST':
         form = TechForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
-        return redirect('adminq')
-    return render(request,'base/admintech.html',{'form':form})
+        return redirect('add_technology')
+    return render(request, 'base/admintech.html', {'form': form})
 
 
 def addclient(request):   
     form = ClientForm()
     if request.method == 'POST':
         form = ClientForm(request.POST)
-       
         if form.is_valid():
             form.save()
-        
-    return render(request,'base/addclient.html',{'form':form})
+    return render(request, 'base/addclient.html', {'form': form})
 
 
 def addinterview(request):   
@@ -194,5 +194,22 @@ def addinterview(request):
         if intform.is_valid():
             intform.save()
         return redirect('addint')
-    return render(request,'base/addinterview.html',{'intform':intform})
+    return render(request, 'base/addinterview.html', {'intform': intform})
+
+
+def UserAssignView(request):
+    form = AssignmentForm()
+    if request.method == 'POST':
+        form = AssignmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('assignuser')
+    return render(request, 'base/assignuser.html', {'form': form})
+
+
+def Assignment_table(request):
+    assign = Assignment.objects.all()
+    return render(request, 'base/assigntable.html', {'assign': assign})
+
+
 

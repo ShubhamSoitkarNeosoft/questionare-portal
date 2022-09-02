@@ -45,9 +45,10 @@
 .
                 <nav class="navbar-nav" style="margin-left:75%" >
                     <a href="http://127.0.0.1:8000/user/" class="nav-item nav-link">User</a>
+                    {% if user.is_superuser %}
                     <a href="{% url 'admin' %}" class="nav-item nav-link">Admin</a>
+                    {%endif%}
                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-
                 </nav>
             </div>
         </nav>

@@ -105,3 +105,4 @@ class Assesment(models.Model):
     question = RichTextField(blank=True, null=True)
     year_of_experience = models.IntegerField()
 
+

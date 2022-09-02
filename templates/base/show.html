@@ -19,7 +19,6 @@
   <div >
       {%if result%}
     <div class="buttons-container">
-       <a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
         <a href="{% url 'result'%}"><button class="btn btn-outline-success" type="button" style="    margin: 5px;
     white-space: nowrap;">Result</button></a>
         <a href="{% url 'assign'%}"><button class="btn btn-outline-success" type="button" style=" margin: 5px;
@@ -45,9 +44,8 @@
     align-items: center;
     border-radius: 7px;
     box-shadow: 1px 2px 6px #ababab;">
-            <strong>Python</strong>
-              <div style="">{{question_python_count}}</div>
-
+            <strong>Python {{question_python_count}}</strong>
+                     <a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
           </span>
 
       </tr>
@@ -78,9 +76,8 @@
     align-items: center;
     border-radius: 7px;
     box-shadow: 1px 2px 6px #ababab;">
-            <strong>Django</strong>
-              <div style="">{{question_django_count}}</div>
-
+            <strong>Django {{question_django_count}}</strong>
+<a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
           </span>
       </tr>
     </thead>
@@ -109,8 +106,8 @@
     align-items: center;
     border-radius: 7px;
     box-shadow: 1px 2px 6px #ababab;">
-            <strong>Docker</strong>
-              <div style="">{{question_docker_count}}</div>
+            <strong>Docker {{question_docker_count}}</strong>
+<a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
 
           </span>
 
@@ -142,9 +139,8 @@
     align-items: center;
     border-radius: 7px;
     box-shadow: 1px 2px 6px #ababab;">
-            <strong>SQL</strong>
-              <div style="">{{question_sql_count}}</div>
-
+            <strong>SQL {{question_sql_count}}</strong>
+              <a href="{% url 'question' %}"><button class="btn btn-outline-success" type="submit" style="margin-left:1%">ADD</button></a>
           </span>
 
       </tr>
