@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db5.sqlite3',
+        'NAME': BASE_DIR / 'db6.sqlite3',
     }
 }
 
@@ -134,3 +134,13 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
     )
 LOGOUT_REDIRECT_URL = '/logout'
+
+CKEDITOR_CONFIGS = {
+   
+         'default': {
+        'toolbar': 'full',
+        'height': 200,
+        'width': 550,
+    },
+
+}

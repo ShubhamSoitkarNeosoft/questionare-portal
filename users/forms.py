@@ -3,8 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 # from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, get_user_model
-from base.models import Interviewee, Contactus
-
+from base.models import Interviewee, Contactus, Assesment
+from ckeditor.widgets import CKEditorWidget
 User = get_user_model()
 
 
@@ -37,3 +37,12 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'message': forms.TextInput(attrs={'class': 'form-control'})
         }
+
+
+class AssesmentForm(forms.ModelForm):
+
+    question=forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = Assesment
+        fields=('question', 'year_of_experience')

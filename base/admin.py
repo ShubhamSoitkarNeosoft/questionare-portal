@@ -1,12 +1,13 @@
 from django.contrib import admin
 from .models import Client, Mentor , Interviewee, Technology, QuestionSet, Question, Category, Contactus, Assignment
+from base.models import Assesment
 
 admin.site.register(Client)
 admin.site.register(Mentor)
 admin.site.register(Technology)
 admin.site.register(QuestionSet)
 admin.site.register(Category)
-
+admin.site.register(Assesment)
 
 class IntervieweeAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'client']

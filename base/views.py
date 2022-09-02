@@ -1,21 +1,20 @@
 from django.shortcuts import render
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import QuestionForm
+from .forms import QuestionForm,TechForm,ClientForm,InterviewForm,CategoryForm,MentorForm
 from .models import Question, Contactus, Category
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from base.models import Client, Question, Technology, Assignment, Interviewee
+from base.models import Client, Question, Technology, Assignment, Interviewee, Assesment, Mentor
 from users.forms import IntervieweeForm
 
 
 def AddQuestion(request):
     form = QuestionForm()
-    client = request.session['client']
-    category = request.session['category_name']
-    #question_python = Question.objects.filter(client__name=client).filter(technology__technology_name="Python").filter(category__category_name=category)
-    #question_python_count = len(question_python)
-    #question_django = Question.objects.filter(client__name=client).filter(technology__technology_name="Django").filter(category__category_name=category)
-    #question_django_count = len(question_django)
+    try:
+        client = request.session['client']
+        category = request.session['category_name']
+    except:
+        form = QuestionForm()
     if request.method == 'POST':
         q = request.POST.get('question')
         print(q)
@@ -96,4 +95,104 @@ def AssignView(request):
         user1 = user
     return render(request, 'users/dashboard.html', {'user1': user1, 'form1': form1})
 
+
+def admin(request):
+  question = Question.objects.count()
+  contact = Contactus.objects.count()
+  interview = Interviewee.objects.count()
+  client = Client.objects.count()
+  mentor = Mentor.objects.count()
+  category = Category.objects.count()
+  assesment = Assesment.objects.count()
+  return render(request, 'admin.html', {'question':question,'contact':contact,'interview':interview,'client':client, 'mentor':mentor,'category':category,'assesment':assesment})
+
+
+def contact_table(request):  
+    contact = Contactus.objects.all()
+    question = Question.objects.all()
+    return render(request,'base/contacttable.html',{'contact':contact,'question':question})
+
+
+def ques_table(request):  
+    question=Question.objects.all()
+    return render(request,'base/qatable.html',{'question':question})
+
+
+def client_table(request):
+    client=Client.objects.all()
+    return render(request,'base/clienttable.html',{'client':client}) 
+
+
+def interview_table(request):
+    inter=Interviewee.objects.all()
+    return render(request,'base/interviewtable.html',{'inter':inter})
+
+
+def category_table(request):
+    category=Category.objects.all()
+    return render(request,'base/categtable.html',{'category':category})    
+
+
+def assesment_table(request):
+    assesment=Assesment.objects.all()
+    return render(request,'base/assestable.html',{'assesment':assesment})        
+
+
+def mentor_table(request):
+    mentor = Mentor.objects.all()
+    print(mentor)
+    return render(request,'mentortable.html',{'mentor':mentor})     
+
+
+def addcateg(request):   
+    form = CategoryForm()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+        
+    return render(request,'base/addcateg.html',{'form':form}) 
+
+
+def addmentor(request):
+    form = MentorForm()
+    if request.method == 'POST':
+        form = MentorForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('addmentor')
+    return render(request,'base/addmentor.html',{'form':form})
+
+
+def admintech(request):
+    form = TechForm()
+    if request.method == 'POST':
+        form = TechForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+        return redirect('adminq')
+    return render(request,'base/admintech.html',{'form':form})
+
+
+def addclient(request):   
+    form = ClientForm()
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+       
+        if form.is_valid():
+            form.save()
+        
+    return render(request,'base/addclient.html',{'form':form})
+
+
+def addinterview(request):   
+    intform = InterviewForm()
+    if request.method == 'POST':
+        intform = InterviewForm(request.POST)  
+        print(intform)
+        if intform.is_valid():
+            intform.save()
+        return redirect('addint')
+    return render(request,'base/addinterview.html',{'intform':intform})
 

@@ -9,7 +9,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+    {% block admin%}
+    {% endblock%}
     <style type="text/css">
         .bs-example {
             margin: 0px;
@@ -27,21 +28,6 @@
         .table{
             display: inline flow-root;
         }
-
-        .card-shadow{
-        box-shadow: 1px 10px 24px #b1b1b1c9;
-        }
-        .button-container{
-        display: inline;
-        }
-        .django-ckeditor-widget{
-            width: 100%;
-            config.height : 0;
-        }
-        .card card-shadow {
-                height: 20px;
-                width: 20px;
-            }
     </style>
 </head>
 
@@ -57,21 +43,29 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" >
 .
-                <nav class="navbar-nav" style="margin-left:85%" >
+                <nav class="navbar-nav" style="margin-left:75%" >
                     <a href="http://127.0.0.1:8000/user/" class="nav-item nav-link">User</a>
-                    <a href="" class="nav-item nav-link">Admin</a>
-                    <a href="http://127.0.0.1:8000/user/contact" class="nav-item nav-link">Contact</a>
+                    <a href="{% url 'admin' %}" class="nav-item nav-link">Admin</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
 
                 </nav>
             </div>
         </nav>
+        {% block title %}
+        {% endblock %}
     </div>
     <div class="pt-3">
+
 
 </div>
     {% block content %}
     {% endblock %}
-
+    {% comment %} {% block cont %}
+    {% endblock %} {% endcomment %}
 </body>
+{% block cont %}
+{% endblock %}
 
+{% block table %}
+{% endblock %}
 </html>

@@ -1,0 +1,69 @@
+{% extends "navbar.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" align="center" style="padding-top:50px;" >
+   
+    
+
+    <form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:5px;" >
+        <fieldset class="form-group" >
+            <legend class="mb-3 white-important">
+            </legend>
+<!--            <div class="col-sm-12 clearfix">   -->
+<!--           -->
+<!--                -->
+<!--                <input type="text" class="form-control"  name="user" placeholder="Address 1 *" value={{request.user.email}}>-->
+<!--              -->
+<!--            </div>  -->
+<!--            <br><br>-->
+<!--            <div class="col-sm-12 clearfix">   -->
+<!--               -->
+<!--               -->
+<!--                <input type="text" class="form-control"  name="userfirst" placeholder="Address 1 *" value={{request.user.first_name}}>-->
+<!--              -->
+<!--            </div>  -->
+<!--            <br><br>-->
+<!--            <div class="col-sm-12 clearfix">   -->
+<!--               -->
+<!--                -->
+<!--                <input type="text" class="form-control" name="userlast" placeholder="Address 1 *" value={{request.user.last_name}}>-->
+<!--              -->
+<!--            </div>  -->
+            {% csrf_token %}
+            {{form.media}}
+            {{ form | crispy }}
+        </fieldset>
+        <button class="btn btn-outline-success" type="submit" style="margin-left:1%">submit</button>
+
+    </form>
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

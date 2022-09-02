@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.core import serializers
 from django.shortcuts import render, redirect, HttpResponse
-from users.forms import CustomUserCreationForm, IntervieweeForm, ContactForm
+from users.forms import CustomUserCreationForm, IntervieweeForm, ContactForm, AssesmentForm
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from base.models import Client, Question, Technology
 from base.forms import QuestionForm
@@ -80,3 +80,15 @@ def contactus(request):
 def UserDashboardView(request):
     user = request.user
     return render(request, 'users/dashboard.html', {'user': user})
+
+
+def assesment(request):
+    form = AssesmentForm()
+    if request.method == 'POST':
+        print(request.POST)
+        form = AssesmentForm(request.POST)
+        if form.is_valid():
+            print(form.is_valid)
+            form.save()
+    return render(request, 'users/assesment.html', {'form': form})
+
