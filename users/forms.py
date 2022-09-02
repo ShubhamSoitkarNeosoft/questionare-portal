@@ -37,22 +37,3 @@ class ContactForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'message': forms.TextInput(attrs={'class': 'form-control'})
         }
-
-# class UserLoginForm(UserCreationForm):
-#     class Meta:
-#         model = User
-#         fields = ('email',)
-#     # email = forms.CharField(help_text=False)
-    # password = forms.CharField()
-
-    # def clean(self, *args, **kwargs):
-    #     username = self.cleaned_data.get('email')
-    #     password = self.cleaned_data.get('password')
-
-    #     if username and password:
-    #         user = authenticate(username=username,password=password)
-    #         if not user:
-    #             raise forms.ValidationError('User Does Not Exist')
-    #         if not user.check_password(password):
-    #             raise forms.ValidationError('Incorrect Password')
-    #     return super(UserLoginForm, self).clean(*args, **kwargs)

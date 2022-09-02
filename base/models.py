@@ -98,10 +98,3 @@ class Assignment(models.Model):
 
     def __str__(self):
         return f'{self.status}'
-
-
-class Assesment(models.Model):
-    user=models.ManyToManyField(User,blank=True)
-    question=RichTextField(blank=True, null=True)
-    year_of_experience=models.IntegerField()
-    mentor = models.ForeignKey(Mentor, on_delete=models.PROTECT)

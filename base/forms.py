@@ -14,12 +14,6 @@ class QuestionForm(forms.ModelForm):
         fields = ['question', 'technology', 'client', 'category']
 
 
-class TechForm(forms.ModelForm):
-    class Meta:
-        model = Technology
-        fields = ['technology_name']
-
-
 class AssignmentForm(forms.ModelForm):
     class Meta:
         model = Assignment

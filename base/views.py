@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import QuestionForm, TechForm
-from .models import Question, Contactus
+from .forms import QuestionForm
+from .models import Question, Contactus, Category
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from base.models import Client, Question, Technology, Assignment, Interviewee, Assesment
+from base.models import Client, Question, Technology, Assignment, Interviewee
 from users.forms import IntervieweeForm
 
 
@@ -97,57 +97,3 @@ def AssignView(request):
     return render(request, 'users/dashboard.html', {'user1': user1, 'form1': form1})
 
 
-def admin(request):
-    question = Question.objects.count()
-    contact = Contactus.objects.count()
-    interview = Interviewee.objects.count()
-    client = Client.objects.count()
-    return render(request, 'admin.html',
-                  {'question': question, 'contact': contact, 'interview': interview, 'client': client})
-
-
-def contact_table(request):
-    contact = Contactus.objects.all()
-    question = Question.objects.all()
-    return render(request, 'base/contacttable.html', {'contact': contact, 'question': question})
-
-
-def ques_table(request):
-    question = Question.objects.all()
-    return render(request, 'base/qatable.html', {'question': question})
-
-
-def client_table(request):
-    client = Client.objects.all()
-    return render(request, 'base/clienttable.html', {'client': client})
-
-
-def interview_table(request):
-    inter = Interviewee.objects.all()
-    return render(request, 'base/interviewtable.html', {'inter': inter})
-
-
-def category_table(request):
-    category = Category.objects.all()
-    return render(request, 'base/categtable.html', {'category': category})
-
-
-def assesment_table(request):
-    assesment = Assesment.objects.all()
-    return render(request, 'base/assestable.html', {'assesment': assesment})
-
-
-def mentor_table(request):
-    mentor = Mentor.objects.all()
-    return render(request, 'mentortable.html', {'mentor': mentor})
-
-
-def admintech(request):
-    form = TechForm()
-    if request.method == 'POST':
-        form = TechForm(request.POST)
-        print(form)
-        if form.is_valid():
-            form.save()
-        return redirect('question')
-    return render(request,'base/admintech.html',{'form':form})
