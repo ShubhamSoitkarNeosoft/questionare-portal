@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY_QA']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =  ["dockereshop123.herokuapp.com","localhost"]
+ALLOWED_HOSTS =  ["qaportal123.herokuapp.com","localhost"]
 
 
 # Application definition
