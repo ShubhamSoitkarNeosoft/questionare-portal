@@ -106,3 +106,7 @@ class Assesment(models.Model):
     year_of_experience = models.IntegerField()
 
 
+class Csv(models.Model):
+    file_name=models.FileField(upload_to='csv')
+    def __str__(self):
+        return f'{self.file_name}'

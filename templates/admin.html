@@ -219,8 +219,27 @@
               <a href="{% url 'asstable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-        </div>
-      </div>
+         
+                    
+   <div class="col-md-4 offset-md-4 mt-5",style="float:right;background-color:blank;">
+            </a>
+     <br>
+     
+          
+     <form method="POST"  enctype="multipart/form-data"  >
+
+      
+          {% csrf_token %}
+          {{form}}
+          <br><br>
+         <center> <button type="submit" class="btn btn-outline-danger">Upload</button>
+         </center>     </form>
+  
+       <hr>
+     
+ </div> 
+ 
+         
       </section>
     </div>
   </div>

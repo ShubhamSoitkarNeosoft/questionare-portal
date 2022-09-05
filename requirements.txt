@@ -7,3 +7,5 @@ django-widget-tweaks==1.4.12
 Pillow==9.2.0
 sqlparse==0.4.2
 tzdata==2022.2
+whitenoise==6.2.0
+waitress==2.1.2

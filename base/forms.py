@@ -1,4 +1,4 @@
-from socket import fromshare
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
@@ -7,7 +7,7 @@ from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Question,Mentor,Category, QuestionSet,Contactus,Technology,Assesment,Client,Interviewee 
+from .models import Csv , Question,Mentor,Category, QuestionSet,Contactus,Technology,Assesment,Client,Interviewee 
 from ckeditor.widgets import CKEditorWidget
 
 
@@ -54,3 +54,8 @@ class MentorForm(forms.ModelForm):
         model = Mentor
         fields = "__all__"
         
+
+class CsvForm(forms.ModelForm):
+    class Meta:
+        model = Csv
+        fields="__all__"           

@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect, HttpResponse
-from .forms import QuestionForm, TechForm, ClientForm, InterviewForm, CategoryForm, MentorForm, AssignmentForm
+from .forms import QuestionForm,CsvForm, TechForm, ClientForm, InterviewForm, CategoryForm, MentorForm, AssignmentForm
 from .models import Question, Contactus, Category
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from base.models import Client, Question, Technology, Assignment, Interviewee, Assesment, Mentor
+from base.models import Client,Csv, Question, Technology, Assignment, Interviewee, Assesment, Mentor
 from users.forms import IntervieweeForm
 
 
@@ -94,16 +94,22 @@ def AssignView(request):
 
 
 def admin(request):
-  question = Question.objects.count()
-  contact = Contactus.objects.count()
-  interview = Interviewee.objects.count()
-  client = Client.objects.count()
-  mentor = Mentor.objects.count()
-  category = Category.objects.count()
-  assesment = Assesment.objects.count()
-  assignment = Assignment.objects.count()
-  technology = Technology.objects.count()
-  return render(request, 'admin.html', {'question': question, 'contact': contact, 'interview': interview, 'client': client, 'mentor': mentor, 'category': category, 'assesment': assesment, 'assignment': assignment,'technology':technology})
+    question = Question.objects.count()
+    contact = Contactus.objects.count()
+    interview = Interviewee.objects.count()
+    client = Client.objects.count()
+    mentor = Mentor.objects.count()
+    category = Category.objects.count()
+    assesment = Assesment.objects.count()
+    assignment = Assignment.objects.count()
+    technology = Technology.objects.count()
+    form= CsvForm(request.POST or None, request.FILES or None)
+    print(form.is_valid)
+    if form.is_valid():
+        form.save()
+        print('done')
+        form= CsvForm()
+    return render(request, 'admin.html', {'form':form, 'question': question, 'contact': contact, 'interview': interview, 'client': client, 'mentor': mentor, 'category': category, 'assesment': assesment, 'assignment': assignment,'technology':technology})
 
 
 def contact_table(request):  
@@ -212,4 +218,17 @@ def Assignment_table(request):
     return render(request, 'base/assigntable.html', {'assign': assign})
 
 
+
+def csv(request):
+    form= CsvForm(request.POST or None, request.FILES or None)
+    print(form.is_valid)
+    if form.is_valid():
+        form.save()
+        print('done')
+        form= CsvForm()
+        # obj=Csv.objects.get(name=file_name)
+        # print(obj)
+        # with open(obj.file_name.path,'r') as f:
+        #    reader=csv.reader(f)   
+    return render(request,'base/csv.html',{'form':form})
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Mentor , Interviewee, Technology, QuestionSet, Question, Category, Contactus, Assignment
+from .models import Client,Csv, Mentor , Interviewee, Technology, QuestionSet, Question, Category, Contactus, Assignment
 from base.models import Assesment
 
 admin.site.register(Client)
@@ -8,6 +8,7 @@ admin.site.register(Technology)
 admin.site.register(QuestionSet)
 admin.site.register(Category)
 admin.site.register(Assesment)
+admin.site.register(Csv)
 
 class IntervieweeAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'client']

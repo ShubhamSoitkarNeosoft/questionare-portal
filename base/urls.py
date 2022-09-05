@@ -23,5 +23,5 @@ urlpatterns = [
     path('assignuser/', views.UserAssignView, name='assignuser'),
     path('assigntable/', views.Assignment_table, name='assigntable'),
     path('techtable/', views.technologytable, name='techtable'),
-
+    path('csv/', views.csv, name='csv'),
 ]
