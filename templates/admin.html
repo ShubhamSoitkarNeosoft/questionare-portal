@@ -56,7 +56,7 @@
             <div class="small-box bg-info" style="margin:40px; ">
               <div class="inner">
                 <div type="button" class="btn" style="float:right;">
-                  <a href="{% url 'question' %}" class="btn btn" style="size:5px;"> <i class="fas fa-plus"></i></a>
+                  <a href="{% url 'adminquestion' %}" class="btn btn" style="size:5px;"> <i class="fas fa-plus"></i></a>
    
                  
                 </div>
@@ -74,7 +74,7 @@
                 <i class="ion ion-bag"></i>
                 
               </div>
-              <a href="{% url 'qatable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{% url 'adminviewquestion' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -221,23 +221,7 @@
           </div>
          
                     
-   <div class="col-md-4 offset-md-4 mt-5",style="float:right;background-color:blank;">
-            </a>
-     <br>
-     
-          
-     <form method="POST"  enctype="multipart/form-data"  >
-
-      
-          {% csrf_token %}
-          {{form}}
-          <br><br>
-         <center> <button type="submit" class="btn btn-outline-danger">Upload</button>
-         </center>     </form>
-  
-       <hr>
-     
- </div> 
+   
  
          
       </section>

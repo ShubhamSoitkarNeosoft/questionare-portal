@@ -1,5 +1,236 @@
-<form method="POST" class="col-12 col-md-6 pl-3 pr-3 pl-md-0 pr-md-0" style="padding-top:50px;" enctype="multipart/form-data" >
-    {% csrf_token %}
-    {{form}}
-        <button class="btn btn-outline-success" type="submit">confirm</button>
+ {% extends "navbar.html" %}
+
+{% block content %}
+
+<section> 
+ 
+<center><div class="col-lg-12 col-6">
+    <!-- small box -->
+    <form method="POST" class="csv" style="padding-top:50px;" enctype="multipart/form-data">
+      {% csrf_token %}
+          {{ form }}
+      <button class="btn btn-outline-success" type="submit">Upload</button>
+
   </form>
+
+
+
+  <br><br><br>
+
+
+  <table class="table" style="border:3px dashed ;">
+    
+    <thead class="thead-dark">
+      <tr >
+        {% for head in csv_headings %}
+
+        <th scope="col" class="ta" style="border:2px dashed ;">{{head}}</th>
+        {% comment %} <th scope="col">Last</th>
+        <th scope="col">Handle</th> {% endcomment %}
+        {% endfor %}
+
+      </tr>
+    </thead>
+    {% for data in df_data %}
+    <tbody>
+      
+      <tr>
+        {% for d in data %}
+        <td class="ta" style="border:2px solid ;">{{d}}</td>
+
+        {% endfor %}
+        {% comment %} <td>{{data}}</td>
+        <td>{{data}}</td>  {% endcomment %}
+        
+      </tr>
+      
+     
+    </tbody>
+    {% endfor %}
+
+  </table>
+  
+  
+  <table class="table" >
+    <thead>
+        <tr>
+            {% for k in header %}
+            
+            <th>{{k}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    {% comment %} <tbody>
+        {% for r in rows %}
+            <tr>
+                {% for e in r %}
+                    <td>{{e.id}}</td>
+                    <td>{{e.chemblid}}</td>
+                    <td>{{e.prefName}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody> {% endcomment %}
+</table>
+
+
+
+
+  <table  >
+    {% for i in header %}
+    <tr>
+     <td>
+       <b style="border:1px solid ; padding:2px,3px,4px,2px;margin:10px">{{i}}</b>&nbsp;
+
+     </td>
+     
+    {% comment %} {% for rowval in csvreader %}  {% endcomment %}
+   
+       {% comment %} {% for val in rowval %} {% endcomment %}
+           {% comment %} {% endfor %} {% endcomment %}
+      </tr>
+      {%endfor%}
+      {% comment %} <tr>
+        <td> {% endcomment %}
+          {% comment %} <b>{{rowval}}</b> {% endcomment %}
+        {% comment %} </td>
+      </tr> {% endcomment %}
+    {% comment %} {% endfor %} {% endcomment %}
+  </table> 
+  </div></center>
+
+</section>
+
+{% endblock %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSV Viewer with HTML, CSS & JavaScript</title>
+<script>
+
+  class TableCsv {
+    /**
+     * @param {HTMLTableElement} root The table element which will display the CSV data.
+     */
+    constructor(root) {
+      this.root = root;
+    }
+  
+    /**
+     * Clears existing data in the table and replaces it with new data.
+     *
+     * @param {string[][]} data A 2D array of data to be used as the table body
+     * @param {string[]} headerColumns List of headings to be used
+     */
+    update(data, headerColumns = []) {
+      this.clear();
+      this.setHeader(headerColumns);
+      this.setBody(data);
+    }
+  
+    /**
+     * Clears all contents of the table (incl. the header).
+     */
+    clear() {
+      this.root.innerHTML = "";
+    }
+  
+    /**
+     * Sets the table header.
+     *
+     * @param {string[]} headerColumns List of headings to be used
+     */
+    setHeader(headerColumns) {
+      this.root.insertAdjacentHTML(
+        "afterbegin",
+        `
+              <thead>
+                  <tr>
+                      ${headerColumns.map((text) => `<th>${text}</th>`).join("")}
+                  </tr>
+              </thead>
+          `
+      );
+    }
+  
+    /**
+     * Sets the table body.
+     *
+     * @param {string[][]} data A 2D array of data to be used as the table body
+     */
+    setBody(data) {
+      const rowsHtml = data.map((row) => {
+        return `
+                  <tr>
+                      ${row.map((text) => `<td>${text}</td>`).join("")}
+                  </tr>
+              `;
+      });
+  
+      this.root.insertAdjacentHTML(
+        "beforeend",
+        `
+              <tbody>
+                  ${rowsHtml.join("")}
+              </tbody>
+          `
+      );
+    }
+  }
+  
+  const tableRoot = document.querySelector("#csvRoot");
+  const csvFileInput = document.querySelector("#csvFileInput");
+  const tableCsv = new TableCsv(tableRoot);
+  
+  csvFileInput.addEventListener("change", (e) => {
+    Papa.parse(csvFileInput.files[0], {
+      delimiter: ",",
+      skipEmptyLines: true,
+      complete: (results) => {
+        tableCsv.update(results.data.slice(1), results.data[0]);
+      }
+    });
+  });
+  
+</script>
+
+<style>
+  table {
+    border-collapse: collapse;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  th {
+    background: #009578;
+    color: #ffffff;
+    text-align: left;
+  }
+  
+  th,
+  td {
+    padding: 10px 20px;
+  }
+  
+  tr:nth-child(even) {
+    background: #eeeeee;
+  }
+  
+
+</style>
+
+    </head>
+    <body>
+        <input type="file" id="csvFileInput" style="padding-bottom: 15px">
+        <table id="csvRoot"></table>
+         
+      <script src="https://cdn.jsdelivr.net/npm/papaparse@5.2.0/papaparse.min.js"></script>
+    </body>
+</html> {% endcomment %}

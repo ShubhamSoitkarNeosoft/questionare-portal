@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('adminquestion/', views.AdminaddQuestion, name='adminquestion'),
     path('question/', views.AddQuestion, name='question'),
-    path('viewquestion', views.ViewQuestion, name='viewquestion'),
+    path('viewquestion/', views.ViewQuestion, name='viewquestion'),
+    path('Adminviewquestion/', views.AdminQuestionView, name='adminviewquestion'),
     path('result/', views.ViewResult, name='result'),
     path('assign/', views.AssignView, name='assign'),
  	path('addcategory/', views.addcateg,name='addcate'),
@@ -23,5 +25,5 @@ urlpatterns = [
     path('assignuser/', views.UserAssignView, name='assignuser'),
     path('assigntable/', views.Assignment_table, name='assigntable'),
     path('techtable/', views.technologytable, name='techtable'),
-    path('csv/', views.csv, name='csv'),
+    path('csv/', views.csv_file, name='csv'),
 ]

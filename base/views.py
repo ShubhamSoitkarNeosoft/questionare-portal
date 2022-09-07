@@ -6,7 +6,7 @@ from .models import Question, Contactus, Category
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from base.models import Client,Csv, Question, Technology, Assignment, Interviewee, Assesment, Mentor
 from users.forms import IntervieweeForm
-
+import csv, io
 
 def AddQuestion(request):
     form = QuestionForm()
@@ -22,6 +22,14 @@ def AddQuestion(request):
             return redirect('question')
     return render(request, 'base/addquestion.html', {'form': form, 'client1': client, 'category': category})
 
+def AdminaddQuestion(request):
+    form = QuestionForm()
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('adminquestion')
+    return render(request, 'base/adminaddques.html', {'form': form})
 
 def ViewQuestion(request):
     client = request.session['client']
@@ -45,6 +53,30 @@ def ViewQuestion(request):
                   {'question_python': question_python, 'question_django': question_django,
                    'client':client, 'category':category, 'question_python_count':question_python_count,
                    'question_django_count': question_django_count, 'question_docker':question_docker,'question_docker_count':question_docker_count,'question_sql':question_sql,'question_sql_count':question_sql_count,'result':result})
+
+
+
+def AdminQuestionView(request):
+    question_python = Question.objects.filter(technology__technology_name="Python")
+    question_python_count = len(question_python)
+    question_docker = Question.objects.filter(technology__technology_name="Docker")
+        
+    question_docker_count = len(question_docker)
+    question_sql = Question.objects.filter(technology__technology_name="SQL")
+       
+    question_sql_count = len(question_sql)
+    question_django = Question.objects.filter(technology__technology_name="Django")
+       
+    question_django_count = len(question_django)
+    user = request.user
+    result = Assignment.objects.all().filter(user__email=user)
+
+    return render(request, 'base/adminviewques.html',
+                  {'question_python': question_python, 'question_django': question_django,
+                    'question_python_count':question_python_count,
+                   'question_django_count': question_django_count, 'question_docker':question_docker,'question_docker_count':question_docker_count,'question_sql':question_sql,'question_sql_count':question_sql_count,'result':result})
+
+
 
 
 def contactus(request):
@@ -103,13 +135,8 @@ def admin(request):
     assesment = Assesment.objects.count()
     assignment = Assignment.objects.count()
     technology = Technology.objects.count()
-    form= CsvForm(request.POST or None, request.FILES or None)
-    print(form.is_valid)
-    if form.is_valid():
-        form.save()
-        print('done')
-        form= CsvForm()
-    return render(request, 'admin.html', {'form':form, 'question': question, 'contact': contact, 'interview': interview, 'client': client, 'mentor': mentor, 'category': category, 'assesment': assesment, 'assignment': assignment,'technology':technology})
+    
+    return render(request, 'admin.html', { 'question': question, 'contact': contact, 'interview': interview, 'client': client, 'mentor': mentor, 'category': category, 'assesment': assesment, 'assignment': assignment,'technology':technology})
 
 
 def contact_table(request):  
@@ -217,18 +244,53 @@ def Assignment_table(request):
     assign = Assignment.objects.all()
     return render(request, 'base/assigntable.html', {'assign': assign})
 
+import pandas as pd
+def csv_file(request):
+    rows1 = []
+    apendlist=[]
+    form = CsvForm()
+    if request.method == 'POST':
+        form = CsvForm(request.POST, request.FILES )
+        if form.is_valid():
+            new_obj = form.save()
+           
+            print(new_obj)
+            
+            fileobj = open(new_obj.file_name.path,'r')
+            csvdata=csv.reader(fileobj)
+            csv_headings = next(csvdata)
+            print(csvdata)
 
+            for row in csvdata:
+                print("This is Row ",row)
+                rows1.append(row)
 
-def csv(request):
-    form= CsvForm(request.POST or None, request.FILES or None)
-    print(form.is_valid)
-    if form.is_valid():
-        form.save()
-        print('done')
-        form= CsvForm()
-        # obj=Csv.objects.get(name=file_name)
-        # print(obj)
-        # with open(obj.file_name.path,'r') as f:
-        #    reader=csv.reader(f)   
-    return render(request,'base/csv.html',{'form':form})
+            # with open (new_obj.file_name.path,'r') as csvfile:
+                # csvdata=csv.reader(csvfile)
+                # csv_headings = next(csvdata)
+                # print("This is heading ",csv_headings)
+                # for data in csvdata:
+                #     print(data)
+                #     # print(type(data))
+                #     pass
+                # print(data)
 
+        return render(request,'base/csv.html',{'form':form,'df_data':rows1,'csv_headings':csv_headings})
+    return render(request,'base/csv.html',{'form':form,'df_data':rows1})
+
+# with open (new_obj.file_name.path,'r') as csvfile:
+#                 csvreader = csv.reader(csvfile)
+#                 # next(csvreader, None)
+#                 csvreader = tuple(csvreader)
+#                 print(csvreader)
+#                 header= {rows[0]:rows[1] for rows in csvreader}
+#                 mydict = {}
+#                 data = new_obj.file_name.read().decode('UTF-8')
+#                 io_string = io.StringIO(data)
+#                 n = next(io_string)
+#                 # for i in io_string:
+#                 #     print(i)
+#                 lines = [line for line in io_string]
+#                 print(header)
+#                 # header = next(csvreader)
+                
