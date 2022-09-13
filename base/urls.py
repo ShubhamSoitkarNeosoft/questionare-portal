@@ -27,3 +27,5 @@ urlpatterns = [
     path('techtable/', views.technologytable, name='techtable'),
     path('csv/', views.csv_file, name='csv'),
 ]
+
+

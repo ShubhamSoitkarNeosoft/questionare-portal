@@ -8,6 +8,8 @@ from base.models import Client,Csv, Question, Technology, Assignment, Interviewe
 from users.forms import IntervieweeForm
 import csv, io
 
+
+
 def AddQuestion(request):
     form = QuestionForm()
     try:
@@ -244,7 +246,6 @@ def Assignment_table(request):
     assign = Assignment.objects.all()
     return render(request, 'base/assigntable.html', {'assign': assign})
 
-import pandas as pd
 def csv_file(request):
     rows1 = []
     apendlist=[]

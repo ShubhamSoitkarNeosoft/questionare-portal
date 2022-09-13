@@ -1,276 +1,388 @@
-{% extends "navbar.html" %}
-{% load static %}
-
-
-{% comment %} <!DOCTYPE html> {% endcomment %}
+{% extends 'navbar.html' %}
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- {% block admin %}
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback' %}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{% static 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %}">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
-</head>
-{% endblock%}
-<body >
-{% comment %} <div class="wrapper"> {% endcomment %}
+  {% block admin%}
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+  <style>
+
+.dbox {
+  position: relative;
+  background: rgb(255, 86, 65);
   
-
-
-  <!-- Content Wrapper. Contains page content -->
-  {% block cont %}
-     <div class="content-header">
-      {% comment %} <div class="container-fluid">
-        
-      </div><!-- /.container-fluid -->
-    </div> {% endcomment %}
-    <!-- /.content-header -->
-    <div class="container-fluid">
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info" style="margin:40px; ">
-              <div class="inner">
-                <div type="button" class="btn" style="float:right;">
-                  <a href="{% url 'adminquestion' %}" class="btn btn" style="size:5px;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-
-                
-                <h3>{{ question }}</h3>
-                {% comment %} <div class="col-sm-2" style="padding-left:20px; float:right; margin:20px;">
-                  <a href="#" class="btn btn-light" style="size:5px;"><i class="material-icons">&#xE147;</i> <span>+</span></a>
-                </div> {% endcomment %}
-             
-                <p>Questions</p>
-               
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-                
-              </div>
-              <a href="{% url 'adminviewquestion' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success" style="margin:40px;">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'clientadd' %}" class="btn btn" style="size:5px;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{client}}<sup style="font-size: 20px"></sup></h3>
-
-                <p>Client</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="{% url 'client' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning" style="margin:40px">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'add_technology' %}" class="btn btn" style="size:8px;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{ technology }}</h3>
-
-                <p>Technology</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'techtable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger" style="margin:40px;" >
-              <div class="inner">
-                <div type="button" class="btn" style="float:right;">
-                  <a href="{% url 'contact' %}" class="btn btn" style="size:5px;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{contact}}</h3>
-
-                <p>Contact</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="{% url 'ctable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box " style="margin:40px;background-color:grey;">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'addcate' %}" class="btn btn" style="size:8px;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{ category }}</h3>
-
-                <p>Category </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'catetable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box " style="margin:40px;background-color:#2b619a;color:white;">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'addmentor' %}" class="btn btn" style="size:8px;color:white;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{ mentor }}</h3>
-
-                <p>Mentor</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'mentortable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-
-           <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box " style="margin:40px;background-color:#2b619a;color:white;">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'assignuser' %}" class="btn btn" style="size:8px;color:white;"> <i class="fas fa-plus"></i></a>
-
-
-                </div>
-                <h3>{{ assignment }}</h3>
-
-                <p>Assign User</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'assigntable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+  background: -moz-linear-gradient(top, rgba(255, 86, 65, 1) 0%, rgba(255, 153, 153, 1) 100%);
+  background: -webkit-linear-gradient(top, rgba(255, 86, 65, 1) 0%, rgba(255, 153, 153, 1) 100%);
+  background: linear-gradient(to bottom, rgba(255, 86, 65, 1) 0%, rgba(253, 50, 97, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ff5641', endColorstr='#fd3261', GradientType=0);
+  border-radius: 4px;
+  text-align: center;
+  margin: 40px 0 30px;
+}
+.dbox__icon {
+  position: absolute;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+}
+.dbox__icon:before {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  background: #fda299;
+  background: rgba(253, 162, 153, 0.34);
+  content: '';
+  border-radius: 50%;
+  left: -17px;
+  top: -17px;
+  z-index: -2;
+}
+.dbox__icon:after {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  background: #f79489;
+  background: rgba(247, 148, 137, 0.91);
+  content: '';
+  border-radius: 50%;
+  left: -10px;
+  top: -10px;
+  z-index: -1;
+}
+.dbox__icon > i {
+  background: #ff5444;
+  border-radius: 50%;
+  line-height: 40px;
+  color: #FFF;
+  width: 40px;
+  height: 40px;
+font-size:22px;
+}
+.dbox__body {
+  padding: 50px 20px;
+}
+.dbox__count {
+  display: block;
+  font-size: 30px;
+  color: #FFF;
+  font-weight: 300;
+}
+.dbox__title {
+  font-size: 22px;
+  color: black;
+  color: rgba(255, 255, 255, 0.81);
+}
+.dbox__title h4{
+  font-size: 22px;
+  color: black;
+}
+.dbox__action {
+  transform: translateY(-50%) translateX(-50%);
+  position: absolute;
+  left: 50%;
+}
 
 
 
 
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box " style="margin:40px;background-color:indigo;color:white;">
-              <div class="inner">
-                <div type="button" class="btn " style="float:right;">
-                  <a href="{% url 'assesment' %}" class="btn btn" style="size:8px;color:white;"> <i class="fas fa-plus"></i></a>
-   
-                 
-                </div>
-                <h3>{{ assesment }}</h3>
+.dbox__action__btn {
+  border: none;
+  background: #FFF;
+  border-radius: 19px;
+  padding: 7px 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: .5px;
+  color: #003e85;
+  box-shadow: 0 3px 5px #d4d4d4;
+}
 
-                <p>Assesment</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="{% url 'asstable' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-         
-                    
-   
- 
-         
-      </section>
-    </div>
-  </div>
- <div class="buttons-container" style="  display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    justify-content: center;">
+.dbox--color-4 {
+  background: rgb(0, 132, 255);
+  background: -moz-linear-gradient(top, rgba(179, 218, 255) 1%, rgba(248, 86, 72, 1) 99%);
+  background: -webkit-linear-gradient(top, rgba(179, 218, 255) 1%, rgba(248, 86, 72, 1) 99%);
+  background: linear-gradient(to bottom, rgba(179, 218, 255) 1%, rgba(248, 86, 72, 1) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+
+.dbox--color-5 {
+  background: rgbrgb(102, 204, 0); 
+  background: -moz-linear-gradient(top, rgb(102, 204, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  background: -webkit-linear-gradient(top, rgb(102, 204, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  background: linear-gradient(to bottom, rgb(102, 204, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+
+.dbox--color-6 {
+  background: rgbrgb(230, 230, 0); 
+  background: -moz-linear-gradient(top, rgb(230, 230, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  background: -webkit-linear-gradient(top, rgb(230, 230, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  background: linear-gradient(to bottom, rgb(230, 230, 0) 1%, rgba(248, 86, 72, 1) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+
+.dbox--color-7{
+  background: rgbrgb(115, 38, 77); 
+  background: -moz-linear-gradient(top, rgb(115, 38, 77)  1%, rgba(248, 86, 72, 1) 99%);
+  background: -webkit-linear-gradient(top, rgb(115, 38, 77)  1%, rgba(248, 86, 72, 1) 99%);
+  background: linear-gradient(to bottom, rgb(115, 38, 77)  1%, rgba(248, 86, 72, 1) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+
+
+.dbox--color-8{
+  background: rgbrgb(115, 38, 38); 
+  background: -moz-linear-gradient(top, rgb(115, 38, 38)  1%, rgba(217, 140, 140) 99%);
+  background: -webkit-linear-gradient(top, rgb(115, 38, 38)  1%, rgba(217, 140, 140) 99%);
+  background: linear-gradient(to bottom, rgb(115, 38, 38)  1%, rgba(217, 140, 140) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+
+
+.dbox--color-9{
+  background: rgbrgb(102, 153, 153); 
+  background: -moz-linear-gradient(top, rgb(102, 153, 153)  1%, rgba(204, 102, 102) 99%);
+  background: -webkit-linear-gradient(top, rgb(102, 153, 153)  1%, rgba(204, 102, 102) 99%);
+  background: linear-gradient(to bottom, rgb(102, 153, 153) 1%, rgb(204, 102, 102) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='blank', endColorstr='#f85648', GradientType=0);
+}
+.dbox--color-2 {
+  background: rgb(252, 190, 27);
+  background: -moz-linear-gradient(top, rgba(252, 190, 27, 1) 1%, rgb(255, 255, 179) 99%);
+  background: -webkit-linear-gradient(top, rgba(252, 190, 27, 1) 1%,rgb(255, 255, 179) 99%);
+  background: linear-gradient(to bottom, rgba(252, 190, 27, 1) 1%,rgb(255, 255, 179) 99%);
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fcbe1b', endColorstr='#f85648', GradientType=0);
+}
+.dbox--color-2 .dbox__icon:after {
+  background: #fee036;
+  background: rgba(254, 224, 54, 0.81);
+}
+
+.dbox--color-4 .dbox__icon:after {
+  background: black;
+  background: rgba(254, 224, 54, 0.81);
+}
+
+.dbox--color-2 .dbox__icon:before {
+  background: #fee036;
+  background: rgba(254, 224, 54, 0.64);
+}
+.dbox--color-2 .dbox__icon > i {
+  background: #fb9f28;
+}
+
+
+.dbox--color-1 {
+  background: rgb(183,71,247);
+  background: -moz-linear-gradient(top, rgb(77, 77, 0) 0%, rgba(255, 153, 153) 100%);
+  background: -webkit-linear-gradient(top, rgb(77, 77, 0)  0%,rgba(255, 153, 153) 100%);
+  background: linear-gradient(to bottom, rgb(77, 77, 0)  0%, rgba(255, 153, 153)) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b747f7', endColorstr='#6c53dc',GradientType=0 );
+}
+
+.dbox--color-3 {
+  background: rgb(183,71,247);
+  background: -moz-linear-gradient(top, rgba(183,71,247,1) 0%, rgba(255, 153, 153) 100%);
+  background: -webkit-linear-gradient(top, rgba(183,71,247,1) 0%,rgba(255, 153, 153) 100%);
+  background: linear-gradient(to bottom, rgba(183,71,247,1) 0%, rgba(255, 153, 153)) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b747f7', endColorstr='#6c53dc',GradientType=0 );
+}
+.dbox--color-3 .dbox__icon:after {
+  background: #b446f5;
+  background: rgba(180, 70, 245, 0.76);
+}
+.dbox--color-3 .dbox__icon:before {
+  background: #e284ff;
+  background: rgba(226, 132, 255, 0.66);
+}
+.dbox--color-3 .dbox__icon > i {
+  background: #8150e4;
+}
+  </style>
+
+  <body>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endblock %}
+<!-- Include the above in your HEAD tag -->
+{% block cont %}
+<div class="container">
+	<div class="row" >
+		<div class="col-md-3" >
+			<div class="dbox dbox--color-1">
+        <a href="/base/adminquestion/">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{ question }}</span>
+					<span class="dbox__title" ><h4>Questions</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'adminviewquestion' %}"
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-2">
+        <a href="{% url 'clientadd' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{client}}</span>
+					<span class="dbox__title" ><h4>Client</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'client' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-3">
+        <a href="{% url 'add_technology' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{ technology }}</span>
+					<span class="dbox__title" ><h4>Technology</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'techtable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-4">
+        <a href="{% url 'contact' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{contact}}</span>
+					<span class="dbox__title" ><h4>Contact</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'ctable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-5">
+        <a href="{% url 'addcate' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{ category }}</span>
+					<span class="dbox__title" ><h4>Category</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'catetable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-8">
+        <a href="{% url 'addmentor' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{mentor}}</span>
+					<span class="dbox__title" ><h4>Mentor</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'mentortable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="dbox dbox--color-9">
+        <a href="{% url 'assignuser' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{assignment}}</span>
+					<span class="dbox__title" ><h4>Assign User</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'assigntable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+    <div class="col-md-3">
+			<div class="dbox dbox--color-7">
+        <a href="{% url 'assesment' %}">
+				<div class="dbox__icon">
+					<i class="glyphicon glyphicon-plus"></i>
+				</div>
+      </a>
+				<div class="dbox__body">
+					<span class="dbox__count">{{ assesment }}</span>
+					<span class="dbox__title" ><h4>Assesment</h4></span>
+				</div>
+				
+				<div class="dbox__action">
+          <a href="{% url 'asstable' %}">
+					<button class="dbox__action__btn">More Info</button></a>
+				</div>				
+			</div>
+		</div>
+
+    <div class="container">
+      <center>
+          <a href="http://127.0.0.1:8000/user/logout/" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out" ></span> Log out
+        </a>
+      </center>
+      </p> <div>
+ {% comment %} <div class="buttons-container" style="display:flex;float:center;align-items: center;flex-wrap: nowrap;justify-content: center;">
 
 <!--    <a href="{% url 'viewquestion' %}"><button class="btn btn-outline-success" type="button" style="    margin: 5px;-->
 <!--    white-space: nowrap;">Show Question</button></a><br>-->
-        <a href="http://127.0.0.1:8000/user/logout/"><button class="btn btn-outline-success" type="button" style="    margin: 5px;
+    <a href="http://127.0.0.1:8000/user/logout/"><button class="btn btn-outline-success" type="button" style="    margin: 5px;
     white-space: nowrap;">Logout</button></a>
      </div>
-<!-- jQuery -->
-<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- ChartJS -->
-<script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
-<!-- Sparkline -->
-<script src="{% static 'plugins/sparklines/sparkline.js' %}"></script>
-<!-- JQVMap -->
-<script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %}"></script>
-<script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %}"></script>
-<!-- daterangepicker -->
-<script src="{% static 'plugins/moment/moment.min.js' %}"></script>
-<script src="{%static 'plugins/daterangepicker/daterangepicker.js' %}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-<!-- Summernote -->
-<script src="{% static 'plugins/summernote/summernote-bs4.min.js' %}"></script>
-<!-- overlayScrollbars -->
-<script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'dist/js/adminlte.js' %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static 'dist/js/demo.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
+	 {% endcomment %}
 </body>
 {% endblock %}
+
 </html>
